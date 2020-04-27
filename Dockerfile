@@ -1,4 +1,4 @@
-FROM golang:1.9.2-alpine3.7
+FROM golang:1.14-alpine
 
 # This is where we add tools we want to support in the offical image.
 # We will be conservative with what gets added.
@@ -6,7 +6,9 @@ FROM golang:1.9.2-alpine3.7
 # Install common tools
 RUN apk add --update --no-cache bash make git curl
 RUN apk add --update --no-cache gcc musl-dev g++
-RUn apk add --update --no-cache vim
+RUN apk add --update --no-cache vim
+
+# RUN mkdir -p $WORKDIR $GOPATH/pkg $ $GOPATH/bin $BASE_PATH && ln -sf $WORKDIR $REPO_PATH
 
 ########################################
 # Cleanup
