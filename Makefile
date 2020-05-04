@@ -35,4 +35,5 @@ devdoc_test:
 	echo $(GOPATH)
 
 devdoc_clean:
+	docker rm $$(docker ps --filter "status=exited" -q)
 	docker rmi $$(docker images -f "dangling=true" -q)
