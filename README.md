@@ -1,32 +1,23 @@
-# devdoc
-
+When you first get a bare machine with git, build essentials, and docker, run:
+```bash
+git clone https://github.com/tendermint/devdoc.git 
+cd devdoc
 ```
-########################################
-### Docker
 
-DEVDOC_SAVE = docker commit `docker ps -a -n 1 -q` devdoc:local
-
-docker_build:
-	docker build -t "tendermint/abci-dev" -f Dockerfile.develop .
-
-docker_run:
-	docker run -it -v "$(CURDIR):/go/src/github.com/tendermint/abci" -w "/go/src/github.com/tendermint/abci" "tendermint/abci-dev" /bin/bash
-
-docker_run_rm:
-	docker run -it --rm -v "$(CURDIR):/go/src/github.com/tendermint/abci" -w "/go/src/github.com/tendermint/abci" "tendermint/abci-dev" /bin/bash
-
-devdoc_init:
-	docker run -it -v "$(CURDIR):/go/src/github.com/tendermint/abci" -w "/go/src/github.com/tendermint/abci" tendermint/devdoc echo
-	# TODO make this safer
-	$(call DEVDOC_SAVE)
-
-devdoc:
-	docker run -it -v "$(CURDIR):/go/src/github.com/tendermint/abci" -w "/go/src/github.com/tendermint/abci" devdoc:local bash
-
-devdoc_save:
-	# TODO make this safer
-	$(call DEVDOC_SAVE)
-
-devdoc_clean:
-	docker rmi $$(docker images -f "dangling=true" -q)
+If you have make:
+```bash
+make docker_build
+make docker_init
+make docker
 ```
+
+Else if you don't have make:
+```bash
+docker build -t "devdoc" -f Dockerfile .
+docker run -it "devdoc" echo
+docker commit `docker ps -a -n 1 -q` devdoc:latest
+./docker_bash.sh
+```
+
+This will get you a bare development environment.
+Modify `Makefile` or `docker_bash.sh` file appropriately.
