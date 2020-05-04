@@ -14,7 +14,7 @@ devdoc_build_develop:
 ########################################
 ### Docker
 
-DEVDOC_SAVE = docker commit `docker ps -a -n 1 -q` devdoc:local
+DEVDOC_SAVE = docker commit `docker ps -a -n 1 -q` devdoc:latest
 
 devdoc_init:
 	docker run -it -v "$(GOPATH):/go" -w "/go/src/github.com/tendermint" "devdoc" echo
