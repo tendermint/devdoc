@@ -22,10 +22,10 @@ devdoc_init:
 	$(call DEVDOC_SAVE)
 
 devdoc:
-	docker run -it -v "$(GOPATH):/go" -w "/go/src/github.com/tendermint" "devdoc:latest" bash
+	docker run -it -v "$(GOPATH):/go" -v "$(HOME):/root" -w "/go/src/github.com/tendermint" "devdoc:latest" bash
 
 devdoc_throwaway:
-	docker run -it --rm -v "$(GOPATH):/go" -w "/go/src/github.com/tendermint" "devdoc:latest" bash
+	docker run -it --rm -v "$(GOPATH):/go" -v "$(HOME):root" -w "/go/src/github.com/tendermint" "devdoc:latest" bash
 
 devdoc_save:
 	# TODO make this safer

@@ -8,9 +8,6 @@ RUN apk add --update --no-cache bash make git curl
 RUN apk add --update --no-cache gcc musl-dev g++
 RUN apk add --update --no-cache vim
 
-# Copy env files
-COPY _bashrc /root/.bashrc
-
 # RUN mkdir -p $WORKDIR $GOPATH/pkg $ $GOPATH/bin $BASE_PATH && ln -sf $WORKDIR $REPO_PATH
 
 ########################################
