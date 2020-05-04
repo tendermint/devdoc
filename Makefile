@@ -15,6 +15,7 @@ devdoc_build_develop:
 ### Docker
 
 DEVDOC_SAVE = docker commit `docker ps -a -n 1 -q` devdoc:latest
+DEVDOC_HOME = "$(GOPATH)/src/github.com/tendermint/devdoc/home"
 
 devdoc_init:
 	docker run -it -v "$(GOPATH):/go" -w "/go/src/github.com/tendermint" "devdoc" echo
@@ -22,10 +23,10 @@ devdoc_init:
 	$(call DEVDOC_SAVE)
 
 devdoc:
-	docker run -it -v "$(GOPATH):/go" -v "$(HOME):/root" -w "/go/src/github.com/tendermint" "devdoc:latest" bash
+	docker run -it -v "$(GOPATH):/go" -v "$(DEVDOC_HOME):/root" -w "/go/src/github.com/tendermint" "devdoc:latest" bash
 
 devdoc_throwaway:
-	docker run -it --rm -v "$(GOPATH):/go" -v "$(HOME):root" -w "/go/src/github.com/tendermint" "devdoc:latest" bash
+	docker run -it --rm -v "$(GOPATH):/go" -v "$(DEVDOC_HOME):root" -w "/go/src/github.com/tendermint" "devdoc:latest" bash
 
 devdoc_save:
 	# TODO make this safer
