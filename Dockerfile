@@ -4,7 +4,7 @@ FROM golang:1.14-alpine
 # We will be conservative with what gets added.
 
 # Install common tools
-RUN apk add --update --no-cache bash make git curl
+RUN apk add --update --no-cache bash make git curl tmux tmux-docs
 RUN apk add --update --no-cache gcc musl-dev g++ linux-headers
 RUN apk add --update --no-cache vim openssl
 
